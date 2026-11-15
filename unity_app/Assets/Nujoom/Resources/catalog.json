@@ -1,0 +1,842 @@
+{
+ "version": 1,
+ "topics": [
+  {
+   "id": "letters",
+   "title": {
+    "en": "Letters",
+    "ar": "الحروف"
+   },
+   "color": "#3D8BFF",
+   "icon": {
+    "kind": "glyph",
+    "value": {
+     "en": "A",
+     "ar": "أ"
+    },
+    "color": "#FFFFFF"
+   },
+   "items": [
+    {
+     "id": "a",
+     "name": {
+      "en": "A",
+      "ar": "ألف"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "A",
+       "ar": "أ"
+      },
+      "color": "#FF5A5F"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "b",
+     "name": {
+      "en": "B",
+      "ar": "باء"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "B",
+       "ar": "ب"
+      },
+      "color": "#3D8BFF"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "c",
+     "name": {
+      "en": "C",
+      "ar": "تاء"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "C",
+       "ar": "ت"
+      },
+      "color": "#2EC27E"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "d",
+     "name": {
+      "en": "D",
+      "ar": "ثاء"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "D",
+       "ar": "ث"
+      },
+      "color": "#FFB020"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "e",
+     "name": {
+      "en": "E",
+      "ar": "جيم"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "E",
+       "ar": "ج"
+      },
+      "color": "#9B5DE5"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "f",
+     "name": {
+      "en": "F",
+      "ar": "حاء"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "F",
+       "ar": "ح"
+      },
+      "color": "#FF7AB6"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    }
+   ],
+   "activities": [
+    {
+     "id": "letters_choice",
+     "type": "choice",
+     "rounds": 6
+    },
+    {
+     "id": "letters_memory",
+     "type": "memory",
+     "rounds": 0
+    }
+   ]
+  },
+  {
+   "id": "numbers",
+   "title": {
+    "en": "Numbers",
+    "ar": "الأرقام"
+   },
+   "color": "#2EC27E",
+   "icon": {
+    "kind": "glyph",
+    "value": {
+     "en": "1",
+     "ar": "١"
+    },
+    "color": "#FFFFFF"
+   },
+   "items": [
+    {
+     "id": "n1",
+     "name": {
+      "en": "One",
+      "ar": "واحد"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "1",
+       "ar": "١"
+      },
+      "color": "#FF5A5F"
+     },
+     "pair": {
+      "kind": "dots",
+      "value": {
+       "en": "1",
+       "ar": "1"
+      },
+      "color": "#FF5A5F"
+     }
+    },
+    {
+     "id": "n2",
+     "name": {
+      "en": "Two",
+      "ar": "اثنان"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "2",
+       "ar": "٢"
+      },
+      "color": "#3D8BFF"
+     },
+     "pair": {
+      "kind": "dots",
+      "value": {
+       "en": "2",
+       "ar": "2"
+      },
+      "color": "#3D8BFF"
+     }
+    },
+    {
+     "id": "n3",
+     "name": {
+      "en": "Three",
+      "ar": "ثلاثة"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "3",
+       "ar": "٣"
+      },
+      "color": "#2EC27E"
+     },
+     "pair": {
+      "kind": "dots",
+      "value": {
+       "en": "3",
+       "ar": "3"
+      },
+      "color": "#2EC27E"
+     }
+    },
+    {
+     "id": "n4",
+     "name": {
+      "en": "Four",
+      "ar": "أربعة"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "4",
+       "ar": "٤"
+      },
+      "color": "#FFB020"
+     },
+     "pair": {
+      "kind": "dots",
+      "value": {
+       "en": "4",
+       "ar": "4"
+      },
+      "color": "#FFB020"
+     }
+    },
+    {
+     "id": "n5",
+     "name": {
+      "en": "Five",
+      "ar": "خمسة"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "5",
+       "ar": "٥"
+      },
+      "color": "#9B5DE5"
+     },
+     "pair": {
+      "kind": "dots",
+      "value": {
+       "en": "5",
+       "ar": "5"
+      },
+      "color": "#9B5DE5"
+     }
+    },
+    {
+     "id": "n6",
+     "name": {
+      "en": "Six",
+      "ar": "ستة"
+     },
+     "visual": {
+      "kind": "glyph",
+      "value": {
+       "en": "6",
+       "ar": "٦"
+      },
+      "color": "#FF7AB6"
+     },
+     "pair": {
+      "kind": "dots",
+      "value": {
+       "en": "6",
+       "ar": "6"
+      },
+      "color": "#FF7AB6"
+     }
+    }
+   ],
+   "activities": [
+    {
+     "id": "numbers_choice",
+     "type": "choice",
+     "rounds": 6
+    },
+    {
+     "id": "numbers_memory",
+     "type": "memory",
+     "rounds": 0
+    },
+    {
+     "id": "numbers_match",
+     "type": "match",
+     "rounds": 0
+    }
+   ]
+  },
+  {
+   "id": "colors",
+   "title": {
+    "en": "Colors",
+    "ar": "الألوان"
+   },
+   "color": "#FF7AB6",
+   "icon": {
+    "kind": "color",
+    "value": {
+     "en": "#FFFFFF",
+     "ar": "#FFFFFF"
+    },
+    "color": ""
+   },
+   "items": [
+    {
+     "id": "red",
+     "name": {
+      "en": "Red",
+      "ar": "أحمر"
+     },
+     "visual": {
+      "kind": "color",
+      "value": {
+       "en": "#F44336",
+       "ar": "#F44336"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "blue",
+     "name": {
+      "en": "Blue",
+      "ar": "أزرق"
+     },
+     "visual": {
+      "kind": "color",
+      "value": {
+       "en": "#2196F3",
+       "ar": "#2196F3"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "green",
+     "name": {
+      "en": "Green",
+      "ar": "أخضر"
+     },
+     "visual": {
+      "kind": "color",
+      "value": {
+       "en": "#43A047",
+       "ar": "#43A047"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "yellow",
+     "name": {
+      "en": "Yellow",
+      "ar": "أصفر"
+     },
+     "visual": {
+      "kind": "color",
+      "value": {
+       "en": "#FDD835",
+       "ar": "#FDD835"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "orange",
+     "name": {
+      "en": "Orange",
+      "ar": "برتقالي"
+     },
+     "visual": {
+      "kind": "color",
+      "value": {
+       "en": "#FB8C00",
+       "ar": "#FB8C00"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "purple",
+     "name": {
+      "en": "Purple",
+      "ar": "بنفسجي"
+     },
+     "visual": {
+      "kind": "color",
+      "value": {
+       "en": "#8E24AA",
+       "ar": "#8E24AA"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    }
+   ],
+   "activities": [
+    {
+     "id": "colors_choice",
+     "type": "choice",
+     "rounds": 6
+    },
+    {
+     "id": "colors_memory",
+     "type": "memory",
+     "rounds": 0
+    },
+    {
+     "id": "colors_match",
+     "type": "match",
+     "rounds": 0
+    }
+   ]
+  },
+  {
+   "id": "animals",
+   "title": {
+    "en": "Animals",
+    "ar": "الحيوانات"
+   },
+   "color": "#FFB020",
+   "icon": {
+    "kind": "sprite",
+    "value": {
+     "en": "lion",
+     "ar": "lion"
+    },
+    "color": ""
+   },
+   "items": [
+    {
+     "id": "cat",
+     "name": {
+      "en": "Cat",
+      "ar": "قطة"
+     },
+     "visual": {
+      "kind": "sprite",
+      "value": {
+       "en": "cat",
+       "ar": "cat"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "dog",
+     "name": {
+      "en": "Dog",
+      "ar": "كلب"
+     },
+     "visual": {
+      "kind": "sprite",
+      "value": {
+       "en": "dog",
+       "ar": "dog"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "lion",
+     "name": {
+      "en": "Lion",
+      "ar": "أسد"
+     },
+     "visual": {
+      "kind": "sprite",
+      "value": {
+       "en": "lion",
+       "ar": "lion"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "elephant",
+     "name": {
+      "en": "Elephant",
+      "ar": "فيل"
+     },
+     "visual": {
+      "kind": "sprite",
+      "value": {
+       "en": "elephant",
+       "ar": "elephant"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "monkey",
+     "name": {
+      "en": "Monkey",
+      "ar": "قرد"
+     },
+     "visual": {
+      "kind": "sprite",
+      "value": {
+       "en": "monkey",
+       "ar": "monkey"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "bird",
+     "name": {
+      "en": "Bird",
+      "ar": "عصفور"
+     },
+     "visual": {
+      "kind": "sprite",
+      "value": {
+       "en": "bird",
+       "ar": "bird"
+      },
+      "color": ""
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    }
+   ],
+   "activities": [
+    {
+     "id": "animals_choice",
+     "type": "choice",
+     "rounds": 6
+    },
+    {
+     "id": "animals_memory",
+     "type": "memory",
+     "rounds": 0
+    },
+    {
+     "id": "animals_match",
+     "type": "match",
+     "rounds": 0
+    }
+   ]
+  },
+  {
+   "id": "shapes",
+   "title": {
+    "en": "Shapes",
+    "ar": "الأشكال"
+   },
+   "color": "#9B5DE5",
+   "icon": {
+    "kind": "shape",
+    "value": {
+     "en": "star",
+     "ar": "star"
+    },
+    "color": "#FFFFFF"
+   },
+   "items": [
+    {
+     "id": "circle",
+     "name": {
+      "en": "Circle",
+      "ar": "دائرة"
+     },
+     "visual": {
+      "kind": "shape",
+      "value": {
+       "en": "circle",
+       "ar": "circle"
+      },
+      "color": "#3D8BFF"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "square",
+     "name": {
+      "en": "Square",
+      "ar": "مربع"
+     },
+     "visual": {
+      "kind": "shape",
+      "value": {
+       "en": "square",
+       "ar": "square"
+      },
+      "color": "#2EC27E"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "triangle",
+     "name": {
+      "en": "Triangle",
+      "ar": "مثلث"
+     },
+     "visual": {
+      "kind": "shape",
+      "value": {
+       "en": "triangle",
+       "ar": "triangle"
+      },
+      "color": "#FFB020"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "star",
+     "name": {
+      "en": "Star",
+      "ar": "نجمة"
+     },
+     "visual": {
+      "kind": "shape",
+      "value": {
+       "en": "star",
+       "ar": "star"
+      },
+      "color": "#FF5A5F"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    },
+    {
+     "id": "heart",
+     "name": {
+      "en": "Heart",
+      "ar": "قلب"
+     },
+     "visual": {
+      "kind": "shape",
+      "value": {
+       "en": "heart",
+       "ar": "heart"
+      },
+      "color": "#FF7AB6"
+     },
+     "pair": {
+      "kind": "",
+      "value": {
+       "en": "",
+       "ar": ""
+      },
+      "color": ""
+     }
+    }
+   ],
+   "activities": [
+    {
+     "id": "shapes_choice",
+     "type": "choice",
+     "rounds": 5
+    },
+    {
+     "id": "shapes_memory",
+     "type": "memory",
+     "rounds": 0
+    },
+    {
+     "id": "shapes_match",
+     "type": "match",
+     "rounds": 0
+    }
+   ]
+  }
+ ]
+}
