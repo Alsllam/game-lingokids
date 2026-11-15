@@ -1,0 +1,5 @@
+# Never commit third-party app packages
+*.apk
+*.xapk
+*.aab
+.DS_Store

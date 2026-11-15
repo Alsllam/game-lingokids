@@ -1,0 +1,55 @@
+{
+  "@@locale": "en",
+  "appTitle": "Nujoom",
+  "greeting": "Hi! Let's play and learn!",
+  "chooseTopic": "Pick a world",
+  "chooseActivity": "Pick a game",
+  "gameChoice": "Find it",
+  "gameMemory": "Memory",
+  "gameMatch": "Match",
+  "findPrompt": "Where is: {name}?",
+  "@findPrompt": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "memoryPrompt": "Find the matching pairs",
+  "matchPrompt": "Drag each one to its place",
+  "resultGreat": "Amazing!",
+  "resultGood": "Well done!",
+  "resultTry": "Good try!",
+  "playAgain": "Play again",
+  "done": "Done",
+  "back": "Back",
+  "close": "Close",
+  "listenAgain": "Listen again",
+  "totalStars": "{count} stars",
+  "@totalStars": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "parentsArea": "Parents",
+  "parentsGateTitle": "For grown-ups only",
+  "parentsGateQuestion": "How much is {a} × {b}?",
+  "@parentsGateQuestion": {
+    "placeholders": {
+      "a": {"type": "int"},
+      "b": {"type": "int"}
+    }
+  },
+  "parentsGateWrong": "Not quite. Try again.",
+  "settingsLanguage": "Language",
+  "languageArabic": "العربية",
+  "languageEnglish": "English",
+  "settingsSfx": "Sound effects",
+  "settingsVoice": "Spoken words",
+  "settingsReset": "Reset progress",
+  "settingsResetConfirm": "All stars will be removed. Continue?",
+  "settingsResetDone": "Progress was reset",
+  "yes": "Yes",
+  "no": "No",
+  "loadError": "Something went wrong while loading the content.",
+  "retry": "Try again",
+  "activityNotFound": "This game could not be found."
+}
