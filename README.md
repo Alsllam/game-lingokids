@@ -72,7 +72,7 @@ flutter run
 | النوع | `value` | مثال |
 |---|---|---|
 | `sprite` | اسم ملف صورة في `assets/art` بلا الامتداد | `"cat"` |
-| `emoji` | رمز تعبيري | `"🐱"` |
+| `emoji` | رمز تعبيري (مدعوم، لكن المحتوى الحالي لا يستخدمه) | `"🐱"` |
 | `glyph` | حرف أو رقم كبير | `{ "ar": "أ", "en": "A" }` |
 | `color` | لون بصيغة hex | `"#F44336"` |
 | `shape` | `circle` `square` `triangle` `star` `heart` | `"star"` |

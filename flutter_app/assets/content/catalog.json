@@ -32,10 +32,10 @@
             "color": "#FF5A5F"
           },
           "pair": {
-            "kind": "emoji",
+            "kind": "sprite",
             "value": {
-              "en": "🍎",
-              "ar": "🐰"
+              "en": "apple",
+              "ar": "lion"
             }
           }
         },
@@ -54,10 +54,10 @@
             "color": "#3D8BFF"
           },
           "pair": {
-            "kind": "emoji",
+            "kind": "sprite",
             "value": {
-              "en": "⚽",
-              "ar": "🦆"
+              "en": "ball",
+              "ar": "duck"
             }
           }
         },
@@ -76,10 +76,10 @@
             "color": "#2EC27E"
           },
           "pair": {
-            "kind": "emoji",
+            "kind": "sprite",
             "value": {
-              "en": "🐱",
-              "ar": "🍎"
+              "en": "cat",
+              "ar": "apple"
             }
           }
         },
@@ -98,10 +98,10 @@
             "color": "#FFB020"
           },
           "pair": {
-            "kind": "emoji",
+            "kind": "sprite",
             "value": {
-              "en": "🦆",
-              "ar": "🦊"
+              "en": "duck",
+              "ar": "fox"
             }
           }
         },
@@ -120,10 +120,10 @@
             "color": "#9B5DE5"
           },
           "pair": {
-            "kind": "emoji",
+            "kind": "sprite",
             "value": {
-              "en": "🥚",
-              "ar": "🐪"
+              "en": "egg",
+              "ar": "carrot"
             }
           }
         },
@@ -142,10 +142,10 @@
             "color": "#FF7AB6"
           },
           "pair": {
-            "kind": "emoji",
+            "kind": "sprite",
             "value": {
-              "en": "🐟",
-              "ar": "🐴"
+              "en": "fish",
+              "ar": "whale"
             }
           }
         }
@@ -327,8 +327,8 @@
       },
       "color": "#FF7AB6",
       "icon": {
-        "kind": "emoji",
-        "value": "🎨"
+        "kind": "sprite",
+        "value": "palette"
       },
       "items": [
         {

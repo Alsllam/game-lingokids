@@ -35,12 +35,12 @@ namespace Nujoom
         {
             root = App.I.NewScreen("Game " + activity.id);
 
-            Ui.RoundButton("Close", root, "X", Leave).At(0.055f, 0.9f, 84f, 84f);
+            Ui.RoundButton("Close", root, "X", Leave).AtDir(0.055f, 0.9f, 84f, 84f);
 
             mascot = Mascot.Create(root, 210f);
-            ((RectTransform)mascot.transform).At(0.095f, 0.26f, 210f, 210f);
+            ((RectTransform)mascot.transform).AtDir(0.095f, 0.26f, 210f, 210f);
 
-            area = Ui.Node("Play Area", root).Frac(0.2f, 0.04f, 0.985f, 0.97f);
+            area = Ui.Node("Play Area", root).FracDir(0.2f, 0.04f, 0.985f, 0.97f);
             StartTemplate();
         }
 
@@ -96,7 +96,7 @@ namespace Nujoom
         public Text MakePrompt(RectTransform parent, string content)
         {
             Card card = Ui.MakeCard("Prompt", parent, Theme.Card);
-            card.Root.Frac(0.14f, 0.86f, 0.86f, 0.985f);
+            card.Root.FracDir(0.14f, 0.86f, 0.86f, 0.985f);
             card.FaceImage.raycastTarget = false;
             Text text = Ui.Label("Text", card.Face, content, 40, Theme.Ink);
             text.rectTransform.Fill(18, 6, 18, 6);
@@ -107,7 +107,7 @@ namespace Nujoom
         public Text MakeCounter(RectTransform parent)
         {
             Text text = Ui.Label("Counter", parent, "", 30, Theme.InkSoft);
-            text.rectTransform.Frac(0.88f, 0.87f, 1f, 0.975f);
+            text.rectTransform.FracDir(0.88f, 0.87f, 1f, 0.975f);
             return text;
         }
 
@@ -130,24 +130,24 @@ namespace Nujoom
             dim.rectTransform.Fill();
 
             Card card = Ui.MakeCard("Panel", dim.transform, Theme.Card);
-            card.Root.At(0.5f, 0.5f, 640f, 420f);
+            card.Root.AtDir(0.5f, 0.5f, 640f, 420f);
 
             string title = stars >= 3 ? Loc.Get("resultGreat") : stars == 2 ? Loc.Get("resultGood") : Loc.Get("resultTry");
-            Ui.Label("Title", card.Face, title, 60, Theme.Ink).rectTransform.Frac(0.06f, 0.7f, 0.94f, 0.95f);
+            Ui.Label("Title", card.Face, title, 60, Theme.Ink).rectTransform.FracDir(0.06f, 0.7f, 0.94f, 0.95f);
 
             for (int i = 0; i < 3; i++)
             {
                 bool earned = i < stars;
                 Image star = Ui.Img("Star " + (i + 1), card.Face, Shapes.Star, earned ? Theme.Star : Theme.StarEmpty);
-                star.rectTransform.At(0.25f + 0.25f * i, 0.52f, 120f, 120f);
+                star.rectTransform.AtDir(0.25f + 0.25f * i, 0.52f, 120f, 120f);
                 if (!earned) continue;
                 float delay = 0.5f + 0.38f * i;
                 Tween.PopIn(star.rectTransform, delay, 0.6f);
                 Tween.Delay(dim.gameObject, delay, () => App.I.Sfx.Play(Sfx.Star));
             }
 
-            Ui.TextButton("Replay", card.Face, Loc.Get("playAgain"), Theme.Primary, onReplay).Root.Frac(0.06f, 0.08f, 0.52f, 0.3f);
-            Ui.TextButton("Done", card.Face, Loc.Get("done"), Theme.Success, onDone).Root.Frac(0.56f, 0.08f, 0.94f, 0.3f);
+            Ui.TextButton("Replay", card.Face, Loc.Get("playAgain"), Theme.Primary, onReplay).Root.FracDir(0.06f, 0.08f, 0.52f, 0.3f);
+            Ui.TextButton("Done", card.Face, Loc.Get("done"), Theme.Success, onDone).Root.FracDir(0.56f, 0.08f, 0.94f, 0.3f);
 
             Tween.PopIn(card.Root);
             Confetti.Burst(dim.transform);

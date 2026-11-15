@@ -165,6 +165,36 @@ namespace Nujoom
             return rect;
         }
 
+        // ---- Direction-aware placement ----
+        // Arabic reads right to left, so whole screens are mirrored: what
+        // sits on the left in English sits on the right in Arabic. Use these
+        // two for screen layout; use plain Frac / At for things that must
+        // never flip (the mascot's face, a memory grid).
+
+        /// <summary>True when the interface language is written right to left.</summary>
+        public static bool RightToLeft
+        {
+            get { return Loc.Language == "ar"; }
+        }
+
+        /// <summary>Alignment for text that starts at the reading edge.</summary>
+        public static TextAnchor StartAlign
+        {
+            get { return RightToLeft ? TextAnchor.MiddleRight : TextAnchor.MiddleLeft; }
+        }
+
+        /// <summary>Like Frac, but mirrored horizontally in right-to-left languages.</summary>
+        public static RectTransform FracDir(this RectTransform rect, float x0, float y0, float x1, float y1)
+        {
+            return RightToLeft ? rect.Frac(1f - x1, y0, 1f - x0, y1) : rect.Frac(x0, y0, x1, y1);
+        }
+
+        /// <summary>Like At, but mirrored horizontally in right-to-left languages.</summary>
+        public static RectTransform AtDir(this RectTransform rect, float anchorX, float anchorY, float width, float height)
+        {
+            return rect.At(RightToLeft ? 1f - anchorX : anchorX, anchorY, width, height);
+        }
+
         /// <summary>A fixed size, centred on a point given as a fraction of the parent.</summary>
         public static RectTransform At(this RectTransform rect, float anchorX, float anchorY, float width, float height)
         {

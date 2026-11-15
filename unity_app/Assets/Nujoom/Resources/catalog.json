@@ -32,10 +32,10 @@
       "color": "#FF5A5F"
      },
      "pair": {
-      "kind": "",
+      "kind": "sprite",
       "value": {
-       "en": "",
-       "ar": ""
+       "en": "apple",
+       "ar": "lion"
       },
       "color": ""
      }
@@ -55,10 +55,10 @@
       "color": "#3D8BFF"
      },
      "pair": {
-      "kind": "",
+      "kind": "sprite",
       "value": {
-       "en": "",
-       "ar": ""
+       "en": "ball",
+       "ar": "duck"
       },
       "color": ""
      }
@@ -78,10 +78,10 @@
       "color": "#2EC27E"
      },
      "pair": {
-      "kind": "",
+      "kind": "sprite",
       "value": {
-       "en": "",
-       "ar": ""
+       "en": "cat",
+       "ar": "apple"
       },
       "color": ""
      }
@@ -101,10 +101,10 @@
       "color": "#FFB020"
      },
      "pair": {
-      "kind": "",
+      "kind": "sprite",
       "value": {
-       "en": "",
-       "ar": ""
+       "en": "duck",
+       "ar": "fox"
       },
       "color": ""
      }
@@ -124,10 +124,10 @@
       "color": "#9B5DE5"
      },
      "pair": {
-      "kind": "",
+      "kind": "sprite",
       "value": {
-       "en": "",
-       "ar": ""
+       "en": "egg",
+       "ar": "carrot"
       },
       "color": ""
      }
@@ -147,10 +147,10 @@
       "color": "#FF7AB6"
      },
      "pair": {
-      "kind": "",
+      "kind": "sprite",
       "value": {
-       "en": "",
-       "ar": ""
+       "en": "fish",
+       "ar": "whale"
       },
       "color": ""
      }
@@ -165,6 +165,11 @@
     {
      "id": "letters_memory",
      "type": "memory",
+     "rounds": 0
+    },
+    {
+     "id": "letters_match",
+     "type": "match",
      "rounds": 0
     }
    ]
@@ -350,10 +355,10 @@
    },
    "color": "#FF7AB6",
    "icon": {
-    "kind": "color",
+    "kind": "sprite",
     "value": {
-     "en": "#FFFFFF",
-     "ar": "#FFFFFF"
+     "en": "palette",
+     "ar": "palette"
     },
     "color": ""
    },

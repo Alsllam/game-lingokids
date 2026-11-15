@@ -93,8 +93,10 @@ void main() {
       final sprites = visuals.where((v) => v.kind == VisualKind.sprite);
       expect(sprites.isNotEmpty, isTrue);
       for (final sprite in sprites) {
-        final file = File('assets/art/${sprite.value.en}.png');
-        expect(file.existsSync(), isTrue);
+        // A picture may differ per language (A-apple, but أ-أسد).
+        for (final name in {sprite.value.en, sprite.value.ar}) {
+          expect(File('assets/art/$name.png').existsSync(), isTrue);
+        }
       }
     });
 
