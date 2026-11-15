@@ -15,6 +15,7 @@ import '../widgets/choice_game.dart';
 import '../widgets/match_game.dart';
 import '../widgets/memory_game.dart';
 import '../widgets/result_overlay.dart';
+import '../widgets/trace_game.dart';
 
 /// Hosts any game template. It owns everything the templates share: the
 /// mascot's reactions, sound effects, saving stars and the result screen.
@@ -111,6 +112,12 @@ class _GamePageState extends State<GamePage> {
         onFinished: _onFinished,
       ),
       GameType.match => MatchGame(
+        key: key,
+        bundle: bundle,
+        onFeedback: _onFeedback,
+        onFinished: _onFinished,
+      ),
+      GameType.trace => TraceGame(
         key: key,
         bundle: bundle,
         onFeedback: _onFeedback,

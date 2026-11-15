@@ -3,6 +3,29 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/domain/localized_text.dart';
 import '../../../../core/domain/item_visual.dart';
 
+/// A point of a tracing path, in a box from (0,0) top-left to (1,1)
+/// bottom-right.
+final class TracePoint extends Equatable {
+  const TracePoint(this.x, this.y);
+
+  final double x;
+  final double y;
+
+  @override
+  List<Object?> get props => [x, y];
+}
+
+/// One pen stroke of a letter: the points the line passes through, in the
+/// order it is written. A stroke with a single point is a dot to tap.
+final class TraceStroke extends Equatable {
+  const TraceStroke(this.points);
+
+  final List<TracePoint> points;
+
+  @override
+  List<Object?> get props => [points];
+}
+
 /// One thing a child learns: a letter, a number, a colour, an animal...
 final class LearningItem extends Equatable {
   const LearningItem({
@@ -10,6 +33,7 @@ final class LearningItem extends Equatable {
     required this.name,
     required this.visual,
     this.pair,
+    this.traces = const {},
   });
 
   final String id;
@@ -24,15 +48,22 @@ final class LearningItem extends Equatable {
   /// digit -> dots). When null the written [name] is used.
   final ItemVisual? pair;
 
+  /// How to write this item, per language code ('ar', 'en'). Only items
+  /// used by the tracing game need it.
+  final Map<String, List<TraceStroke>> traces;
+
+  List<TraceStroke> tracesFor(String languageCode) =>
+      traces[languageCode] ?? const [];
+
   ItemVisual get pairOrLabel =>
       pair ?? ItemVisual(kind: VisualKind.label, value: name);
 
   @override
-  List<Object?> get props => [id, name, visual, pair];
+  List<Object?> get props => [id, name, visual, pair, traces];
 }
 
 /// The reusable game templates. Add a value here when adding a template.
-enum GameType { choice, memory, match }
+enum GameType { choice, memory, match, trace }
 
 /// A playable activity: a template plus the content it is filled with.
 final class Activity extends Equatable {

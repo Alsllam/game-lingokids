@@ -7,14 +7,25 @@
   "gameChoice": "Find it",
   "gameMemory": "Memory",
   "gameMatch": "Match",
+  "gameTrace": "Trace",
   "findPrompt": "Where is: {name}?",
   "@findPrompt": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "memoryPrompt": "Find the matching pairs",
   "matchPrompt": "Drag each one to its place",
+  "tracePrompt": "Trace: {name}",
+  "@tracePrompt": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "resultGreat": "Amazing!",
   "resultGood": "Well done!",
   "resultTry": "Good try!",
@@ -26,7 +37,9 @@
   "totalStars": "{count} stars",
   "@totalStars": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "parentsArea": "Parents",
@@ -34,8 +47,12 @@
   "parentsGateQuestion": "How much is {a} × {b}?",
   "@parentsGateQuestion": {
     "placeholders": {
-      "a": {"type": "int"},
-      "b": {"type": "int"}
+      "a": {
+        "type": "int"
+      },
+      "b": {
+        "type": "int"
+      }
     }
   },
   "parentsGateWrong": "Not quite. Try again.",

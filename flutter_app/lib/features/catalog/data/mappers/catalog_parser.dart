@@ -28,6 +28,7 @@ abstract final class CatalogParser {
     final activities = _list(json['activities'], '$id.activities')
         .map((raw) => _activity(_map(raw, '$id.activity'), id, knownIds))
         .toList(growable: false);
+    _checkTraceActivities(id, items, activities);
     return Topic(
       id: id,
       title: _text(json['title'], '$id.title'),
@@ -41,12 +42,66 @@ abstract final class CatalogParser {
   static LearningItem _item(Map<String, Object?> json) {
     final id = _string(json['id'], 'item.id');
     final pair = json['pair'];
+    final trace = json['trace'];
     return LearningItem(
       id: id,
       name: _text(json['name'], '$id.name'),
       visual: _visual(_map(json['visual'], '$id.visual'), '$id.visual'),
       pair: pair == null ? null : _visual(_map(pair, '$id.pair'), '$id.pair'),
+      traces: trace == null ? const {} : _traces(trace, '$id.trace'),
     );
+  }
+
+  /// `{"en": [stroke, ...], "ar": [...]}` where a stroke is `[[x, y], ...]`.
+  static Map<String, List<TraceStroke>> _traces(Object? json, String path) {
+    final byLanguage = _map(json, path);
+    return {
+      for (final entry in byLanguage.entries)
+        entry.key: _list(entry.value, '$path.${entry.key}')
+            .map((stroke) => _stroke(stroke, '$path.${entry.key}'))
+            .toList(growable: false),
+    };
+  }
+
+  static TraceStroke _stroke(Object? json, String path) {
+    final points = _list(json, path).map((raw) {
+      final pair = _list(raw, path);
+      if (pair.length != 2 || pair[0] is! num || pair[1] is! num) {
+        throw FormatException('$path: a point must be [x, y]');
+      }
+      final x = (pair[0]! as num).toDouble();
+      final y = (pair[1]! as num).toDouble();
+      if (x < 0 || x > 1 || y < 0 || y > 1) {
+        throw FormatException('$path: point [$x, $y] is outside 0..1');
+      }
+      return TracePoint(x, y);
+    }).toList(growable: false);
+    if (points.isEmpty) throw FormatException('$path: a stroke has no points');
+    return TraceStroke(points);
+  }
+
+  /// A tracing game is only playable when each of its items says how it is
+  /// written in every language of the app.
+  static void _checkTraceActivities(
+    String topicId,
+    List<LearningItem> items,
+    List<Activity> activities,
+  ) {
+    for (final activity in activities) {
+      if (activity.type != GameType.trace) continue;
+      final used = activity.itemIds.isEmpty
+          ? items
+          : items.where((item) => activity.itemIds.contains(item.id));
+      for (final item in used) {
+        for (final language in const ['ar', 'en']) {
+          if (item.tracesFor(language).isEmpty) {
+            throw FormatException(
+              '${activity.id}: item "${item.id}" has no "$language" trace',
+            );
+          }
+        }
+      }
+    }
   }
 
   static Activity _activity(

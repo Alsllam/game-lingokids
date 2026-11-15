@@ -8,6 +8,7 @@ import 'package:nujoom/features/catalog/domain/entities/catalog.dart';
 import 'package:nujoom/core/domain/item_visual.dart';
 import 'package:nujoom/features/catalog/domain/repositories/catalog_repository.dart';
 import 'package:nujoom/features/catalog/domain/usecases/get_activity_bundle.dart';
+import 'package:nujoom/features/games/domain/game_engines.dart';
 import 'package:dartz/dartz.dart';
 
 final class FakeCatalogRepository implements CatalogRepository {
@@ -100,6 +101,30 @@ void main() {
       }
     });
 
+    test('every letter of a tracing game can be written in both languages', () {
+      var letters = 0;
+      for (final topic in catalog.topics) {
+        final traced = topic.activities.any((a) => a.type == GameType.trace);
+        if (!traced) continue;
+        for (final item in topic.items) {
+          for (final language in const ['ar', 'en']) {
+            // A finger that follows the guide exactly must finish the
+            // letter without a single slip.
+            final tracker = TraceTracker(item.tracesFor(language));
+            for (final path in [...tracker.paths]) {
+              for (final point in path) {
+                tracker.touch(point.x, point.y);
+              }
+            }
+            expect(tracker.isDone, isTrue);
+            expect(tracker.slips, 0);
+            letters++;
+          }
+        }
+      }
+      expect(letters >= 12, isTrue);
+    });
+
     test('every item has a name in both languages', () {
       for (final topic in catalog.topics) {
         for (final item in topic.items) {
@@ -135,6 +160,55 @@ void main() {
           ),
         ),
       );
+    });
+
+    test('reads tracing strokes per language', () {
+      final json = minimalCatalog();
+      final topic = (json['topics']! as List<Object?>).single! as Map<String, Object?>;
+      final first = (topic['items']! as List<Object?>).first! as Map<String, Object?>;
+      first['trace'] = {
+        'en': [
+          [
+            [0.2, 0.5],
+            [0.8, 0.5],
+          ],
+          [
+            [0.5, 0],
+          ],
+        ],
+      };
+      final item = CatalogParser.parse(json).topics.single.items.first;
+      expect(item.tracesFor('en').length, 2);
+      expect(item.tracesFor('en').first.points.first, const TracePoint(0.2, 0.5));
+      expect(item.tracesFor('en').last.points.single, const TracePoint(0.5, 0));
+      expect(item.tracesFor('ar'), isEmpty);
+    });
+
+    test('rejects a trace game whose items cannot be traced', () {
+      expect(
+        () => CatalogParser.parse(minimalCatalog(gameType: 'trace')),
+        throwsA(
+          isA<FormatException>().having(
+            (error) => error.message,
+            'message',
+            contains('has no "ar" trace'),
+          ),
+        ),
+      );
+    });
+
+    test('rejects a tracing point outside the box', () {
+      final json = minimalCatalog();
+      final topic = (json['topics']! as List<Object?>).single! as Map<String, Object?>;
+      final first = (topic['items']! as List<Object?>).first! as Map<String, Object?>;
+      first['trace'] = {
+        'en': [
+          [
+            [0.2, 1.5],
+          ],
+        ],
+      };
+      expect(() => CatalogParser.parse(json), throwsA(isA<FormatException>()));
     });
 
     test('rejects a catalog without topics', () {

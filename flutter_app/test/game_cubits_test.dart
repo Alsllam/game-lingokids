@@ -8,6 +8,7 @@ import 'package:nujoom/features/games/presentation/cubit/choice_cubit.dart';
 import 'package:nujoom/features/games/presentation/cubit/game_feedback.dart';
 import 'package:nujoom/features/games/presentation/cubit/match_cubit.dart';
 import 'package:nujoom/features/games/presentation/cubit/memory_cubit.dart';
+import 'package:nujoom/features/games/presentation/cubit/trace_cubit.dart';
 
 ActivityBundle makeBundle(GameType type, {int items = 4, int rounds = 3}) {
   final list = [
@@ -195,6 +196,98 @@ void main() {
       }
       expect(cubit.state.finished, isTrue);
       expect(cubit.state.stars, 3);
+      await cubit.close();
+    });
+  });
+
+  group('TraceCubit', () {
+    const enStroke = TraceStroke([TracePoint(0.2, 0.5), TracePoint(0.8, 0.5)]);
+    const arStroke = TraceStroke([TracePoint(0.5, 0.2), TracePoint(0.5, 0.8)]);
+
+    ActivityBundle traceBundle() {
+      final base = makeBundle(GameType.trace, items: 3, rounds: 2);
+      final items = [
+        for (final item in base.items)
+          LearningItem(
+            id: item.id,
+            name: item.name,
+            visual: item.visual,
+            traces: const {
+              'en': [enStroke],
+              'ar': [arStroke],
+            },
+          ),
+      ];
+      return ActivityBundle(
+        topic: base.topic,
+        activity: base.activity,
+        items: items,
+      );
+    }
+
+    TraceCubit build(String language) => TraceCubit(
+      bundle: traceBundle(),
+      languageCode: language,
+      random: Random(4),
+      celebrateFor: Duration.zero,
+    );
+
+    /// Drags a finger along every stroke of the current letter.
+    Future<void> writeLetter(TraceCubit cubit) async {
+      for (final path in [...cubit.state.paths]) {
+        for (final point in path) {
+          await cubit.touch(point.x, point.y);
+        }
+      }
+    }
+
+    test('uses the strokes of the chosen language', () async {
+      final english = build('en');
+      final arabic = build('ar');
+      expect(english.state.paths.single.first, const TracePoint(0.2, 0.5));
+      expect(arabic.state.paths.single.first, const TracePoint(0.5, 0.2));
+      await english.close();
+      await arabic.close();
+    });
+
+    test('plays as many letters as the activity has rounds', () async {
+      final cubit = build('en');
+      expect(cubit.state.items.length, 2);
+      await cubit.close();
+    });
+
+    test('progress is reported while the finger moves', () async {
+      final cubit = build('en');
+      await cubit.touch(0.2, 0.5);
+      await cubit.touch(0.3, 0.5);
+      expect(cubit.state.reached > 0, isTrue);
+      expect(cubit.state.stroke, 0);
+      await cubit.close();
+    });
+
+    test('writing every letter finishes with 3 stars', () async {
+      final cubit = build('en');
+      await writeLetter(cubit);
+      expect(cubit.state.index, 1);
+      expect(cubit.state.reached, 0);
+      expect(cubit.state.solved, isFalse);
+      await writeLetter(cubit);
+      expect(cubit.state.finished, isTrue);
+      expect(cubit.state.stars, 3);
+      expect(cubit.state.feedback, GameFeedback.finished);
+      await cubit.close();
+    });
+
+    test('slips are kept across letters and reported as wrong', () async {
+      final cubit = build('en');
+      await cubit.touch(0.2, 0.5);
+      await cubit.touch(0.3, 0.95);
+      expect(cubit.state.slips, 1);
+      expect(cubit.state.feedback, GameFeedback.wrong);
+      await cubit.touch(0.2, 0.5);
+      await writeLetter(cubit);
+      expect(cubit.state.slips, 1);
+      expect(cubit.state.index, 1);
       await cubit.close();
     });
   });

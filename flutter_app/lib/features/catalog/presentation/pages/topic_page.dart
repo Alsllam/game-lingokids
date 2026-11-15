@@ -165,6 +165,7 @@ class _ActivityCard extends StatelessWidget {
       GameType.choice => (Icons.touch_app_rounded, l10n.gameChoice),
       GameType.memory => (Icons.grid_view_rounded, l10n.gameMemory),
       GameType.match => (Icons.swipe_rounded, l10n.gameMatch),
+      GameType.trace => (Icons.gesture_rounded, l10n.gameTrace),
     };
     final title = activity.title?.of(context.languageCode) ?? fallbackTitle;
 
