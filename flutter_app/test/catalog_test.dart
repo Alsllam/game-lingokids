@@ -83,6 +83,21 @@ void main() {
       }
     });
 
+    test('every picture used by the content exists in assets/art', () {
+      final visuals = [
+        for (final topic in catalog.topics) ...[
+          topic.icon,
+          for (final item in topic.items) ...[item.visual, ?item.pair],
+        ],
+      ];
+      final sprites = visuals.where((v) => v.kind == VisualKind.sprite);
+      expect(sprites.isNotEmpty, isTrue);
+      for (final sprite in sprites) {
+        final file = File('assets/art/${sprite.value.en}.png');
+        expect(file.existsSync(), isTrue);
+      }
+    });
+
     test('every item has a name in both languages', () {
       for (final topic in catalog.topics) {
         for (final item in topic.items) {

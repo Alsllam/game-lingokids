@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../../../core/widgets/item_visual_view.dart';
 import '../../../../core/widgets/kid_widgets.dart';
 import '../../../catalog/domain/entities/catalog.dart';
 import '../cubit/choice_cubit.dart';
+import '../cubit/game_feedback.dart';
 import 'game_template.dart';
 
 /// Template 1: the mascot names something, the child taps the right picture.
@@ -46,13 +48,29 @@ class _ChoiceView extends StatefulWidget {
 }
 
 class _ChoiceViewState extends State<_ChoiceView> {
+  /// How long the child may hesitate before getting a clue.
+  static const _hintAfter = Duration(seconds: 7);
+
+  Timer? _idleTimer;
+
+  /// True while the right answer is gently pulsing as a clue.
+  bool _hint = false;
+
   @override
   void initState() {
     super.initState();
     // Say the first word once the screen is on.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _sayTarget(context.read<ChoiceCubit>().state);
+      if (!mounted) return;
+      _sayTarget(context.read<ChoiceCubit>().state);
+      _restartIdleTimer();
     });
+  }
+
+  @override
+  void dispose() {
+    _idleTimer?.cancel();
+    super.dispose();
   }
 
   void _sayTarget(ChoiceState state) {
@@ -61,6 +79,24 @@ class _ChoiceViewState extends State<_ChoiceView> {
       state.round.target.name.of(language),
       languageCode: language,
     );
+    widget.onFeedback(GameFeedback.prompt);
+  }
+
+  /// Any activity (a tap, a new round) pushes the clue further away.
+  void _restartIdleTimer() {
+    _idleTimer?.cancel();
+    if (_hint) setState(() => _hint = false);
+    _idleTimer = Timer(_hintAfter, _giveHint);
+  }
+
+  /// The child has been stuck for a while: repeat the word and make the
+  /// right answer pulse. It costs no stars; the aim is to keep them playing.
+  void _giveHint() {
+    if (!mounted) return;
+    final state = context.read<ChoiceCubit>().state;
+    if (state.solved || state.finished) return;
+    setState(() => _hint = true);
+    _sayTarget(state);
   }
 
   @override
@@ -71,7 +107,10 @@ class _ChoiceViewState extends State<_ChoiceView> {
         // A new round started: say the new word.
         BlocListener<ChoiceCubit, ChoiceState>(
           listenWhen: (previous, current) => previous.index != current.index,
-          listener: (context, state) => _sayTarget(state),
+          listener: (context, state) {
+            _sayTarget(state);
+            _restartIdleTimer();
+          },
         ),
         // Right / wrong / finished: let the host screen react.
         BlocListener<ChoiceCubit, ChoiceState>(
@@ -79,7 +118,15 @@ class _ChoiceViewState extends State<_ChoiceView> {
               previous.feedbackTick != current.feedbackTick,
           listener: (context, state) {
             widget.onFeedback(state.feedback);
-            if (state.finished) widget.onFinished(state.stars);
+            if (state.finished) {
+              _idleTimer?.cancel();
+              widget.onFinished(state.stars);
+            } else if (state.solved) {
+              _idleTimer?.cancel();
+              if (_hint) setState(() => _hint = false);
+            } else {
+              _restartIdleTimer();
+            }
           },
         ),
       ],
@@ -98,7 +145,10 @@ class _ChoiceViewState extends State<_ChoiceView> {
                   label: l10n.listenAgain,
                   size: 48,
                   color: context.tokens.primary,
-                  onTap: () => _sayTarget(state),
+                  onTap: () {
+                    _sayTarget(state);
+                    _restartIdleTimer();
+                  },
                 ),
               ),
               const SizedBox(height: AppSpacing.s16),
@@ -121,6 +171,7 @@ class _ChoiceViewState extends State<_ChoiceView> {
                               eliminated: state.eliminated.contains(option.id),
                               celebrated:
                                   state.solved && option.id == round.target.id,
+                              hinted: _hint && option.id == round.target.id,
                               onTap: () =>
                                   context.read<ChoiceCubit>().pick(option),
                             ),
@@ -143,12 +194,16 @@ class _OptionCard extends StatelessWidget {
     required this.item,
     required this.eliminated,
     required this.celebrated,
+    required this.hinted,
     required this.onTap,
   });
 
   final LearningItem item;
   final bool eliminated;
   final bool celebrated;
+
+  /// Pulses to point the child at the right answer.
+  final bool hinted;
   final VoidCallback onTap;
 
   @override
@@ -164,14 +219,17 @@ class _OptionCard extends StatelessWidget {
         child: AnimatedOpacity(
           opacity: eliminated ? 0.35 : 1,
           duration: tokens.motionMedium,
-          child: Pressable(
-            onTap: eliminated ? null : onTap,
-            semanticLabel: item.name.of(context.languageCode),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: KidCard(
-                color: celebrated ? tokens.success : null,
-                child: ItemVisualView(visual: item.visual),
+          child: Pulse(
+            active: hinted,
+            child: Pressable(
+              onTap: eliminated ? null : onTap,
+              semanticLabel: item.name.of(context.languageCode),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: KidCard(
+                  color: celebrated ? tokens.success : null,
+                  child: ItemVisualView(visual: item.visual),
+                ),
               ),
             ),
           ),

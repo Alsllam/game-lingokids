@@ -22,6 +22,10 @@ enum VisualKind {
 
   /// A written word (used as a matching target).
   label,
+
+  /// A picture file from `assets/art/`. `value` is the file name without
+  /// the extension, e.g. `cat` for `assets/art/cat.png`.
+  sprite,
 }
 
 final class ItemVisual extends Equatable {

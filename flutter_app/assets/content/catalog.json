@@ -422,8 +422,8 @@
       },
       "color": "#FFB020",
       "icon": {
-        "kind": "emoji",
-        "value": "🦁"
+        "kind": "sprite",
+        "value": "lion"
       },
       "items": [
         {
@@ -433,8 +433,8 @@
             "ar": "قطة"
           },
           "visual": {
-            "kind": "emoji",
-            "value": "🐱"
+            "kind": "sprite",
+            "value": "cat"
           }
         },
         {
@@ -444,8 +444,8 @@
             "ar": "كلب"
           },
           "visual": {
-            "kind": "emoji",
-            "value": "🐶"
+            "kind": "sprite",
+            "value": "dog"
           }
         },
         {
@@ -455,8 +455,8 @@
             "ar": "أسد"
           },
           "visual": {
-            "kind": "emoji",
-            "value": "🦁"
+            "kind": "sprite",
+            "value": "lion"
           }
         },
         {
@@ -466,8 +466,8 @@
             "ar": "فيل"
           },
           "visual": {
-            "kind": "emoji",
-            "value": "🐘"
+            "kind": "sprite",
+            "value": "elephant"
           }
         },
         {
@@ -477,8 +477,8 @@
             "ar": "قرد"
           },
           "visual": {
-            "kind": "emoji",
-            "value": "🐵"
+            "kind": "sprite",
+            "value": "monkey"
           }
         },
         {
@@ -488,8 +488,8 @@
             "ar": "عصفور"
           },
           "visual": {
-            "kind": "emoji",
-            "value": "🐦"
+            "kind": "sprite",
+            "value": "bird"
           }
         }
       ],

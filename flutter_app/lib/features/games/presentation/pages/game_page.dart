@@ -64,6 +64,8 @@ class _GamePageState extends State<GamePage> {
       case GameFeedback.finished:
         sound.play(Sfx.win);
         _mascot.play(MascotMood.cheer);
+      case GameFeedback.prompt:
+        _mascot.play(MascotMood.talk);
       case GameFeedback.none:
         break;
     }

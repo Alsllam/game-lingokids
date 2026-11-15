@@ -41,6 +41,7 @@ flutter:
   assets:
     - assets/content/
     - assets/audio/
+    - assets/art/
 
   fonts:
     - family: Baloo

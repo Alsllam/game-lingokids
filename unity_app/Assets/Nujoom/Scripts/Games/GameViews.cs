@@ -21,6 +21,11 @@ namespace Nujoom
         private readonly Text prompt;
         private readonly Text counter;
 
+        // Clue for a child who is stuck: after a pause the right card bounces.
+        private const float HintAfterSeconds = 7f;
+        private readonly Dictionary<string, Card> optionCards = new Dictionary<string, Card>();
+        private int hintTicket;
+
         public ChoiceView(GameScreen host, RectTransform area, Topic topic, Activity activity)
         {
             this.host = host;
@@ -34,8 +39,11 @@ namespace Nujoom
         private void ShowRound()
         {
             GameScreen.Clear(body);
+            optionCards.Clear();
             ChoiceRound round = session.Round;
             Ui.SetText(prompt, Loc.Format("findPrompt", round.Target.name.Of(Loc.Language)));
+            host.Prompt();
+            ScheduleHint();
             Ui.SetText(counter, (session.Index + 1) + " / " + session.Rounds.Count);
 
             int count = round.Options.Count;
@@ -49,7 +57,26 @@ namespace Nujoom
                 Visuals.Build(card.Face, option.visual, 16f);
                 Tween.PopIn(card.Root, 0.09f * i);
                 Ui.OnTap(card.Root, () => Pick(option, card));
+                optionCards[option.id] = card;
             }
+        }
+
+        // Every call makes older scheduled hints stale, so any activity
+        // (a tap, a new round) pushes the clue further away.
+        private void ScheduleHint()
+        {
+            int ticket = ++hintTicket;
+            Tween.Delay(body.gameObject, HintAfterSeconds, () =>
+            {
+                if (ticket != hintTicket || session.Solved || session.Finished) return;
+                Card target;
+                if (optionCards.TryGetValue(session.Round.Target.id, out target))
+                {
+                    Tween.Punch(target.Root, 0.22f, 0.7f);
+                    host.Prompt();
+                }
+                ScheduleHint(); // keep nudging until the child answers
+            });
         }
 
         private void Pick(LearningItem option, Card card)
@@ -60,6 +87,7 @@ namespace Nujoom
             if (outcome == Outcome.Wrong)
             {
                 host.Wrong();
+                ScheduleHint();
                 Tween.Shake(card.Root);
                 // Fade the ruled-out card and stop it reacting to taps.
                 var group = card.Root.gameObject.AddComponent<CanvasGroup>();
@@ -68,6 +96,7 @@ namespace Nujoom
                 return;
             }
 
+            hintTicket++; // answered: cancel any pending hint
             card.SetColor(Theme.Success);
             Tween.Punch(card.Root);
             host.Right();

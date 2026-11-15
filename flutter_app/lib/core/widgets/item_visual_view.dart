@@ -70,6 +70,20 @@ class ItemVisualView extends StatelessWidget {
               return CustomPaint(
                 painter: _ShapePainter(value, tint ?? tokens.primary),
               );
+            case VisualKind.sprite:
+              return Padding(
+                padding: EdgeInsets.all(side * 0.04),
+                child: Image.asset(
+                  'assets/art/$value.png',
+                  fit: BoxFit.contain,
+                  // A missing file shows a placeholder instead of crashing.
+                  errorBuilder: (context, error, stackTrace) => Icon(
+                    Icons.image_not_supported_outlined,
+                    size: side * 0.5,
+                    color: tokens.inkSoft,
+                  ),
+                ),
+              );
             case VisualKind.dots:
               return CustomPaint(
                 painter: _DotsPainter(

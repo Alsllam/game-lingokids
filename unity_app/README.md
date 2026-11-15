@@ -28,7 +28,6 @@
 | | Flutter | Unity |
 |---|---|---|
 | نطق الكلمات | يعمل | **غير موجود بعد** (Unity لا يملك محرك نطق، انظر التمرين 9) |
-| رسومات الحيوانات | رموز تعبيرية | صور أصلية مرسومة (`Resources/Art`) |
 | الحروف | 3 ألعاب | لعبتان (بدون التوصيل) |
 | اتجاه الواجهة بالعربية | ينعكس كاملًا | النص فقط |
 | الخط | Baloo Bhaijaan 2 | Noto Kufi Arabic |
@@ -126,4 +125,6 @@ Assets/Nujoom/
 
 ## التراخيص
 
-خط Noto Kufi Arabic مرخّص برخصة SIL Open Font License، ونصّها في `Assets/Nujoom/Resources/Fonts/OFL.txt`. صور الحيوانات والمؤثرات الصوتية أصلية ومولّدة بسكربتات موجودة في المستودع.
+خط Noto Kufi Arabic مرخّص برخصة SIL Open Font License، ونصّها في `Assets/Nujoom/Resources/Fonts/OFL.txt`. خطوات تجربة هذه النسخة في [`docs/TEST_PLAN.md`](../docs/TEST_PLAN.md) (الجزء 2).
+
+صور الحيوانات والمؤثرات الصوتية أصلية ومولّدة بسكربتات موجودة في المستودع.

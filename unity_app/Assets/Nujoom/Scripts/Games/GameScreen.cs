@@ -76,6 +76,12 @@ namespace Nujoom
             mascot.Play(MascotMood.Sad);
         }
 
+        /// <summary>The game is asking (or repeating) its question.</summary>
+        public void Prompt()
+        {
+            mascot.Play(MascotMood.Talk);
+        }
+
         public void Finish(int stars)
         {
             Store.SaveBest(activity.id, stars);
